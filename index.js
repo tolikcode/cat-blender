@@ -1,4 +1,4 @@
-import mergeImg from 'merge-img';
+import { joinImages } from 'join-images';
 import minimist from 'minimist';
 import fetch from 'node-fetch'; // TODO: can be removed when Fetch Api is stable in node 18
 
@@ -16,5 +16,5 @@ async function fetchImage(keyword) {
 
 const first = await fetchImage(greeting);
 const second = await fetchImage(who);
-const result = await mergeImg([first, second]);
-result.write('cat-card.jpg', () => console.log('The file was saved!'));
+const result = await joinImages([first, second], { direction: 'horizontal' });
+result.toFile('cat-card.jpg', () => console.log('The file was saved!'));
