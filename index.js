@@ -14,7 +14,6 @@ async function fetchImage(keyword) {
   return Buffer.from(await response.arrayBuffer(), 'binary');
 }
 
-const first = await fetchImage(greeting);
-const second = await fetchImage(who);
-const result = await joinImages([first, second], { direction: 'horizontal' });
+const [image1, image2] = await Promise.all([fetchImage(greeting), fetchImage(who)]);
+const result = await joinImages([image1, image2], { direction: 'horizontal' });
 result.toFile('cat-card.jpg', () => console.log('The file was saved!'));
